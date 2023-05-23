@@ -9,8 +9,11 @@ btnDatos.addEventListener("click", actualizarDatosApi);
 function actualizarDatosApi() {
   const qtyValue = qtyInput.value;
   const countryValue = countrySelect.value;
+
+  console.log(qtyValue);
+  console.log(countryValue);
 }
-const dataApi = `https://api.example.com/data?qty=${qtyValue}&country=${countryValue}`;
+const dataApi = `${linkApi}?qty=${qtyValue}&country=${countryValue}`;
 
 //creo la funcion Fetch Try Catch
 const apiLink = async (url) => {
