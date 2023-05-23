@@ -1,66 +1,7 @@
-//declaro las variables
-const linkApi = "https://randomuser.me/api/?results=";
-const qty = 20;
-const dataApi = `${linkApi}${qty}`;
-
-//creo la funcion Fetch Try Catch
-const apiLink = async (url) => {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-//recupero la los datos de la base de datos
-const url = dataApi;
-const datos = await apiLink(url);
-
-/* // TODO -  ahora los puedo usar como lo necesite, muestro los datos ordenado por nombre asc
-
-// Creo una constante que contenga los datos de la clave 'name' ordenados
-
-const nombres = document.querySelector("#datos");
-
-const nombresOrdenados = datos.results
-  .map((resultado) => resultado.name.first.toLocaleLowerCase())
-  .sort((nombreA, nombreB) =>
-    nombreA < nombreB ? -1 : nombreA > nombreB ? 1 : 0
-  );
-
-nombres.innerHTML = nombresOrdenados.join(", ");
-
-
-// MAP de Datos
-
-/* 
-! Extrae todos los campos
-const datos1 = datos.results.map((resultDatos1) => {
-    return {
-      resultDatos1
-    };
-  });
-  
-  // Mostrar resultados en la consola
-  console.log(datos1);
-*/
-
-// !extrae solo los campos necesarios
-const resultados = datos.results.map((resultado) => {
-  return {
-    imagen: resultado.picture.thumbnail,
-    nombre: resultado.name.first,
-    apellido: resultado.name.last,
-    edad: resultado.dob.age,
-    genero: resultado.gender,
-    pais: resultado.location.country,
-  };
-});
+import { resultados } from "./api.js";
 
 // Mostrar resultados en la consola
-console.log(resultados);
+//console.log(resultados);
 
 /*
    &  muestro los datos sin formato en HTML
@@ -86,6 +27,8 @@ resultados.forEach((resultado) => {
   const tdEdad = document.createElement("td");
   const tdGenero = document.createElement("td");
   const tdPais = document.createElement("td");
+  const tdCiudad = document.createElement("td");
+  const tdEstado = document.createElement("td");
 
   img.src = resultado.imagen;
   tdImagen.appendChild(img);
@@ -94,6 +37,8 @@ resultados.forEach((resultado) => {
   tdEdad.textContent = resultado.edad;
   tdGenero.textContent = resultado.genero;
   tdPais.textContent = resultado.pais;
+  tdCiudad.textContent = resultado.ciudad;
+  tdEstado.textContent = resultado.estado;
 
   tr.appendChild(tdImagen);
   tr.appendChild(tdNombre);
@@ -101,6 +46,8 @@ resultados.forEach((resultado) => {
   tr.appendChild(tdEdad);
   tr.appendChild(tdGenero);
   tr.appendChild(tdPais);
+  tr.appendChild(tdCiudad);
+  tr.appendChild(tdEstado);
   tbody.appendChild(tr);
 });
 
@@ -114,7 +61,7 @@ resultados.forEach((item) => {
     countPais[item.pais] = 1;
   }
 });
-console.log(countPais);
+//console.log(countPais);
 
 // & Muestro en HTML
 const paisTbody = document.querySelector("#datos tbody");
@@ -138,7 +85,7 @@ resultados.forEach((item) => {
     countGenders[item.genero] = 1;
   }
 });
-console.log(countGenders);
+//console.log(countGenders);
 
 // & Muestro en HTML
 
@@ -148,7 +95,83 @@ for (const genero in countGenders) {
 <tr>
 <td>${genero}</td>
 <td>${countGenders[genero]}</td>
+
 </tr>
 `;
   genderTbody.innerHTML += generos;
+}
+
+// & cantidad de personas por edad
+
+let countEdades = {};
+resultados.forEach((item) => {
+  if (countEdades[item.edad]) {
+    countEdades[item.edad]++;
+  } else {
+    countEdades[item.edad] = 1;
+  }
+});
+// console.log(countEdades);
+
+// & Muestro en HTML
+
+const edadTbody = document.querySelector("#edades tbody");
+for (const edad in countEdades) {
+  const edades = `
+<tr>
+<td>${edad}</td>
+<td>${countEdades[edad]}</td>
+</tr>
+`;
+  edadTbody.innerHTML += edades;
+}
+
+// & cantidad de personas por ciudad
+
+let countCiudades = {};
+resultados.forEach((item) => {
+  if (countCiudades[item.ciudad]) {
+    countCiudades[item.ciudad]++;
+  } else {
+    countCiudades[item.ciudad] = 1;
+  }
+});
+// console.log(countCiudades);
+
+// & Muestro en HTML
+
+const ciudadTbody = document.querySelector("#ciudades tbody");
+for (const ciudad in countCiudades) {
+  const ciudades = `
+<tr>
+<td>${ciudad}</td>
+<td>${countCiudades[ciudad]}</td>
+</tr>
+`;
+  ciudadTbody.innerHTML += ciudades;
+}
+
+// & cantidad de personas por Estados
+
+let countEstados = {};
+resultados.forEach((item) => {
+  if (countEstados[item.estado]) {
+    countEstados[item.estado]++;
+  } else {
+    countEstados[item.estado] = 1;
+  }
+});
+// console.log(countEstados);
+
+// & Muestro en HTML
+
+const estadoTbody = document.querySelector("#estados tbody");
+for (const estado in countEstados) {
+  const estados = `
+<tr>
+<td>${estado}</td>
+<td>${countEstados[estado]}</td>
+</tr>
+`;
+  estadoTbody.innerHTML += estados;
 }
