@@ -1,48 +1,59 @@
-//declaro las variables
-const linkApi = "https://randomuser.me/api/";
+const form = document.getElementById("form");
 const qtyInput = document.getElementById("qty");
-const countrySelect = document.getElementById("country");
-const btnDatos = document.getElementById("btn-datos");
+const country = document.getElementById("country");
+// const button = document.getElementById("submit");
 
-btnDatos.addEventListener("click", actualizarDatosApi);
+const linkApi = "https://randomuser.me/api/";
 
-function actualizarDatosApi() {
+let datos = null; // Variable para almacenar los datos de usuarios
+
+const getUsuarios = async (e) => {
+  //   e.preventDefault();
+
   const qtyValue = qtyInput.value;
-  const countryValue = countrySelect.value;
+  const countryValue = country.value;
+  const dataApi = `${linkApi}?nat=${countryValue}&results=${qtyValue}`;
 
-  console.log(qtyValue);
-  console.log(countryValue);
-}
-const dataApi = `${linkApi}?qty=${qtyValue}&country=${countryValue}`;
-
-//creo la funcion Fetch Try Catch
-const apiLink = async (url) => {
   try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
+    const data = await fetch(dataApi);
+    datos = await data.json(); // Almacenar los datos en la variable datos
+
+    // console.log(qtyValue);
+    // console.log(countryValue);
+    // console.log(datos);
+
+    return datos;
   } catch (error) {
     console.log(error);
+    return null;
   }
 };
-// console.log(qtyValue);
-console.log(countryValue);
-console.log(btnDatos);
 
-//recupero la los datos de la base de datos
-const url = dataApi;
-const datos = await apiLink(url);
+// button.addEventListener("click", );
 
-// !extrae y exporto solo los campos necesarios
-export const resultados = datos.results.map((resultado) => {
-  return {
-    imagen: resultado.picture.thumbnail,
-    nombre: resultado.name.first,
-    apellido: resultado.name.last,
-    edad: resultado.dob.age,
-    genero: resultado.gender,
-    pais: resultado.location.country,
-    ciudad: resultado.location.city,
-    estado: resultado.location.state,
-  };
-});
+export const resultados = async () => {
+  datos = await getUsuarios();
+
+  if (datos) {
+    return datos.results.map((resultado) => {
+      return {
+        imagen: resultado.picture.thumbnail,
+        nombre: resultado.name.first,
+        apellido: resultado.name.last,
+        edad: resultado.dob.age,
+        genero: resultado.gender,
+        pais: resultado.location.country,
+        ciudad: resultado.location.city,
+        estado: resultado.location.state,
+      };
+    });
+  } else {
+    return [];
+  }
+};
+
+qtyInput.addEventListener("change", resultados);
+country.addEventListener("change", resultados);
+
+// console.log(await resultados());
+

@@ -1,139 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="./assets/css/style.css" />
+  <!-- CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./assets/css/navbar.css" />
+  <link rel="stylesheet" href="./assets/css/jumbtron.css" />
+  <link rel="stylesheet" href="./assets/css/footer.css" />
 
-    <title>Consumo API</title>
-  </head>
-  <body>
-    <!-- HEADER -->
-    <header>
-      <!-- NAV -->
-      <nav>
-        <h1>MENU DE LA PAGINA</h1>
-      </nav>
-    </header>
-    <!-- MAIN -->
-    <main>
-      <div>
-        <canvas id="myChart" width="400" height="100"></canvas>
+  <title>Consumo API</title>
+</head>
+
+<body>
+  <!-- HEADER -->
+
+  <header>
+    <a href="#">
+      <h2 class="bg-body-tertiary">Dashboard</h2>
+    </a>
+    <input type="checkbox" id="check" />
+    <label for="check" class="mostrar-menu"> &#8801; </label>
+    <div class="inp">
+      <input placeholder="Search" type="text" />
+      <button type="submit">Buscar</button>
+    </div>
+    <nav class="menu">
+      <div class="inpBoton">
+        <input placeholder="Search" type="text" />
+        <button type="submit">Buscar</button>
       </div>
+      <hr />
+      <a href="#">Quiénes Somos </a>
+      <a href="#">Contactos </a>
+      <span class="diViD">|</span>
+      <a href="#">Iniciar Sesión </a>
+      <a href="#">Regístrate </a>
+      <label for="check" class="esconder-menu">&#215;</label>
+    </nav>
+  </header>
+  <!-- JUMBOTRON -->
+  <div class="card border-light container" style="max-width: auto">
+    <div class="row g-0">
 
-      <!-- seccion -->
-      <section>
-        <!-- articulos -->
-        <article>
-          <h2>Api de Usuarios</h2>
-          <p>Selecciona la cantidad de datos que quieres mostrar</p>
-        </article>
+      <div class="col-md-8 d-flex align-items-center">
+        <div class="card-body ">
+          <h2 class="card-title my-3">Pintar APIS con Javascript</h2>
+          <p class="card-text">Leer una API desde JavaScript utilizando fetch, try y catch implica enviar una solicitud
+            a la API para obtener datos en formato JSON, manejar posibles errores con try y catch, y luego utilizar los
+            datos obtenidos para graficar los resultados utilizando una biblioteca como Chart.js, donde se pueden
+            personalizar los gráficos y opciones de visualización.</p>
 
-        <article>
-          <!--  Filtro Datos -->
-          <div class="datos-api">
-            <label for="qty">Cantidad</label>
-            <input type="number" name="qty" id="qty" min="10" max="50" />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <img src="./assets/image/api-svgrepo-com.svg" style="max-width:400px;" alt="...">
+      </div>
+    </div>
+  </div>
+  <!-- MAIN -->
+  <main>
+    <!-- seccion -->
+    <section>
+      <!-- articulos -->
+      <article class="container text-center">
+        <h2 class="my-3">Seleccione los Datos a Graficar</h2>
+        <p>Selecciona la cantidad de datos que quieres mostrar</p>
+      </article>
 
-            <select name="Paises" id="country">
-              <option value="au">Australia</option>
-              <option value="br">Brasil</option>
-              <option value="us">Estados Unidos</option>
-              <option value="mx">Mexico</option>
-              <option value="rs">Serbia</option>
-              <option value="nz">Nueva Zelanda</option>
-            </select>
+      <article class="container text-center">
+        <!--  Filtro Datos -->
+        <form id="form">
+          <label for="qty">Cantidad</label>
+          <select name="qty" id="qty">
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+          </select>
 
-            <input type="button" value="Mostrar" id="btn-datos" />
+          <select name="Country" id="country">
+            <option value="au">Australia</option>
+            <option value="br">Brasil</option>
+            <option value="us">Estados Unidos</option>
+            <option value="mx">Mexico</option>
+            <option value="rs">Serbia</option>
+            <option value="nz">Nueva Zelanda</option>
+          </select>
 
-            <!-- tabla cuenta edades -->
-            <table id="edades">
-              <thead>
-                <tr>
-                  <th>Edad</th>
-                  <th>Cantidad</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
+          <!-- <input type="button" value="Mostrar" id="submit" /> -->
+        </form>
+      </article>
 
-            <!-- tabla cuenta generos -->
-            <table id="gender">
-              <thead>
-                <tr>
-                  <th>Genero</th>
-                  <th>Cantidad</th>
-                  <th>%</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
+      <article>
 
-            <!-- tabla cuenta paises -->
-            <table id="datos">
-              <thead>
-                <tr>
-                  <th>País</th>
-                  <th>Cantidad</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
+        <!-- Card Resultados -->
+
+        <div class="container  mt-5">
+          <div class="row">
+            <div class="col">
+              <div class="row" id="cards-gender">
+              </div>
+              <div class="col">
+
+                <div class="row" id="card-pais">
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Graficos 1 - 2 -->
+            <div>
+              <div class="container text-center  mt-5">
+                <div class="row">
+                  <div class="col-6 border rounded ">
+                    <canvas id="chart-gender"> </canvas>
+                  </div>
+                  <div class="col-6 border rounded ">
+                    <canvas id="chart-Ciudades"></canvas>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Graficos 3 - 4 -->
+            <div>
+              <div class="container text-center  mt-5">
+                <div class="row">
+                  <div class="col-6 border rounded">
+                    <canvas id="chart-estados"> </canvas>
+                  </div>
+                  <div class="col-6 border rounded">
+                    <canvas id="chart-edades"></canvas>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Tabla de datos -->
+
+            <div style="height: 300px; overflow: auto;">
+              <table id="resultados" class="table  mt-5 table-striped table-hover container">
+                <thead class="primary">
+                  <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Edad</th>
+                    <th>Genero</th>
+                    <th>País</th>
+                    <th>Ciudad</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Aquí van los datos de la tabla -->
+
+                </tbody>
+              </table>
+            </div>
+
+
+
 
             <!-- tabla cuenta ciudades -->
             <table id="ciudades">
               <thead>
-                <tr>
-                  <th>Ciudad</th>
-                  <th>Cantidad</th>
-                </tr>
+                <!-- <tr>
+                <th>Ciudad</th>
+                <th>Cantidad</th>
+              </tr> -->
               </thead>
               <tbody></tbody>
             </table>
 
-            <!-- tabla cuenta Estados -->
-            <table id="estados">
+            <!-- tabla cuenta usuarios por Pais seleccionado -->
+            <table id="countPais">
               <thead>
-                <tr>
-                  <th>Estado</th>
-                  <th>Cantidad</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-
-            <!-- datos en tabla -->
-            <table id="resultados">
-              <thead>
-                <tr>
-                  <th>Imagen</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Edad</th>
-                  <th>Genero</th>
+                <!-- <tr>
                   <th>País</th>
-                  <th>Ciudad</th>
-                  <th>Estado</th>
-                </tr>
+                  <th>Usuarios</th>
+                </tr> -->
               </thead>
               <tbody></tbody>
             </table>
-          </div>
-        </article>
-      </section>
-    </main>
 
-    <!-- FOOTER -->
-    <footer>
-      <!--  -->
-      <h3>Pie de página</h3>
-    </footer>
-    <script src="./assets/js/main.js" type="module"></script>
+            <!-- tabla cuenta usuarios por Genero -->
+            <table id="genero">
+              <thead>
+                <!-- <tr>
+                <th>Genero</th>
+                <th>Cantidad</th>
+              </tr> -->
+              </thead>
+              <tbody></tbody>
+            </table>
 
-    <script src="./assets/js/charts.js"></script>
-  </body>
+            <!-- tabla cuenta usuarios por Edad -->
+            <table id="countEdad">
+              <thead>
+                <!-- <tr>
+                <th>Edad</th>
+                <th>Cantidad</th>
+              </tr> -->
+              </thead>
+              <tbody></tbody>
+            </table>
+
+            <!-- tabla cuenta usuarios por Estado -->
+            <table id="countEstado">
+              <thead>
+                <!-- <tr>
+                  <th>Estado</th>
+                  <th>Cantidad</th>
+                </tr> -->
+              </thead>
+              <tbody></tbody>
+            </table>
+
+
+
+      </article>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div>
+      <ul class="ul-foot-01">
+        <li>
+          <a href="#">
+            <img src="./assets/image/footer-Img/img-footer-f.png" alt="" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img class="Fimg-p" src="./assets/image/footer-Img/img-footer-I.png" alt="" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img class="Fimg-p-2" src="./assets/image/footer-Img/img-footer-T.png" alt="" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="./assets/image/footer-Img/img-footer-G.png" alt="" />
+          </a>
+        </li>
+      </ul>
+      <hr />
+      <div class="d-fpd">
+        <p>
+          © 2023. Todos los derechos reservados. Esta es una página de
+          aterrizaje ficticia para fines académicos.
+
+        </p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+  <script src="./assets/js/main.js" type="module"></script>
+</body>
+
 </html>

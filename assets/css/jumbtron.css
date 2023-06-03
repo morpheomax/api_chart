@@ -1,0 +1,80 @@
+body .jbtron {
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 40px;
+}
+body .jbtron .box-j1 h2 {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+}
+body .jbtron .box-j1 {
+  padding: 0 32px;
+  text-align: center;
+}
+body .jbtron .box-j1 p {
+  padding: 0 20px;
+}
+body .jbtron .box-j1 .p-drescripcion1 {
+  margin-bottom: 30px;
+  font-size: 26px;
+  font-weight: bold;
+}
+body .jbtron .box-j1 .p-drescripcion2 {
+  font-size: 12px;
+  font-weight: bold;
+}
+body .jbtron .box-j1 img {
+  width: 50%;
+}
+body .jbtron .box-j2 {
+  text-align: center;
+}
+
+body .jbtron .box-j2,
+.box-j1 {
+  width: 100%;
+}
+body .jbtron .box-j2 img {
+  width: 80%;
+  padding: 0 40px;
+}
+body .grafic {
+  margin: 40px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+body .grafic div {
+  width: 15%;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  margin: 0;
+  padding: 10px 12px;
+}
+body .grafic div p {
+  font-size: 20px;
+}
+body .grafic div {
+  background-color: beige;
+}
+body .no {
+  display: flex;
+  justify-content: center;
+}
+body .no h1 {
+  font-size: 20px;
+}
+@media (max-width: 768px) {
+  body .grafic {
+    /* width: 100vw; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+}

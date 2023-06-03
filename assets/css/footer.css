@@ -1,0 +1,29 @@
+body footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+}
+body footer ul li {
+  list-style: none;
+}
+body footer ul {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+body footer hr {
+  width: 80%;
+  margin: auto;
+}
+body footer .d-fpd {
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+}
+body footer .d-fpd p {
+  color: rgba(95, 95, 95, 0.995);
+  margin: 10px 0;
+  text-align: center;
+}
